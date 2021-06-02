@@ -1,57 +1,69 @@
 {
-    "name": "xyz",
-    "resources": {
-        "xyz:index:StaticPage": {
-            "isComponent": true,
-            "inputProperties": {
-                "indexContent": {
-                    "type": "string",
-                    "description": "The HTML content for index.html."
-                }
-            },
-            "requiredInputs": [
-                "indexContent"
-            ],
-            "properties": {
-                "bucket": {
-                    "$ref": "/aws/v4.0.0/schema.json#/resources/aws:s3%2Fbucket:Bucket",
-                    "description": "The bucket resource."
-                },
-                "websiteUrl": {
-                    "type": "string",
-                    "description": "The website URL."
-                }
-            },
-            "required": [
-                "bucket",
-                "websiteUrl"
-            ]
+  "name": "AzureWebapp",
+  "resources": {
+    "x:index:AzureWebApp": {
+      "isComponent": true,
+      "inputProperties": {
+        "resourceGroupName": {
+          "type": "string",
+          "description": "Resource group to place resources in"
+        },
+        "websitePort": {
+          "type": "integer",
+          "description": "Port that container is running on"
+        },
+        "pathToDockerfile": {
+          "type": "string",
+          "description": "Path to dockerfile for app"
+        },
+        "appServicePlanId": {
+          "type": "string",
+          "description": "Id of app service plan to add web app to"
         }
-    },
-    "language": {
-        "csharp": {
-            "packageReferences": {
-                "Pulumi": "3.*",
-                "Pulumi.Aws": "4.*"
-            }
-        },
-        "go": {
-            "generateResourceContainerTypes": true,
-            "importBasePath": "github.com/pulumi/pulumi-xyz/sdk/go/xyz"
-        },
-        "nodejs": {
-            "dependencies": {
-                "@pulumi/aws": "^4.0.0"
-            },
-            "devDependencies": {
-                "typescript": "^3.7.0"
-            }
-        },
-        "python": {
-            "requires": {
-                "pulumi": ">=3.0.0,<4.0.0",
-                "pulumi-aws": ">=4.0.0,<5.0.0"
-            }
+      },
+      "requiredInputs": [
+        "websitePort",
+        "pathToDockerfile",
+        "resourceGroupName"
+      ],
+      "properties": {
+        "websiteUrl": {
+          "type": "string",
+          "description": "The website URL."
         }
+      },
+      "required": ["websiteUrl"]
     }
+  },
+  "language": {
+    "csharp": {
+      "packageReferences": {
+        "Pulumi": "3.*",
+        "Pulumi.AzureNative": "1.*",
+        "Pulumi.Docker": "3.*"
+      }
+    },
+    "go": {
+      "generateResourceContainerTypes": true,
+      "importBasePath": "github.com/pierskarsenbarg/pulumi-azurewebapp/sdk/go/azurewebapp"
+    },
+    "nodejs": {
+      "dependencies": {
+        "@pulumi/azure-native": "^1.0.0",
+        "@pulumi/pulumi": "^3.0.0",
+        "@pulumi/docker": "^3.0.0"
+      },
+      "devDependencies": {
+        "typescript": "^3.7.0"
+      },
+      "packageName": "@pierskarsenbarg/pulumi-azurewebapp"
+    },
+    "python": {
+      "requires": {
+        "pulumi": ">=3.0.0,<4.0.0",
+        "pulumi-azurenative": ">=1.0.0",
+        "pulumi-docker": ">=3.0.0,<4.0.0"
+      }
+    }
+  }
 }

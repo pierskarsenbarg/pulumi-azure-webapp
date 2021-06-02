@@ -1,8 +1,13 @@
-import * as xyz from "@pulumi/xyz";
+import * as resources from "@pulumi/azure-native/resources";
+import { WebAppContainer } from "./webAppContainer";
 
-const page = new xyz.StaticPage("page", {
-    indexContent: "<html><body><p>Hello world!</p></body></html>",
+// Create an Azure Resource Group
+const resourceGroup = new resources.ResourceGroup("test-rg");
+
+const webapp = new WebAppContainer("testapp", {
+    resourceGroupName: resourceGroup.name,
+    pathToDockerFile: "./app",
+    websitePort: 80
 });
 
-export const bucket = page.bucket;
-export const url = page.websiteUrl;
+export const url = webapp.url;

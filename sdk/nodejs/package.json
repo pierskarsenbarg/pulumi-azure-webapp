@@ -1,17 +1,16 @@
 {
-    "name": "@pulumi/xyz",
+    "name": "@pierskarsenbarg/pulumi-azurewebapp",
     "version": "${VERSION}",
     "scripts": {
         "build": "tsc"
     },
     "dependencies": {
-        "@pulumi/aws": "^4.0.0"
+        "@pulumi/azure-native": "^1.0.0",
+        "@pulumi/docker": "^3.0.0",
+        "@pulumi/pulumi": "^3.0.0"
     },
     "devDependencies": {
         "typescript": "^3.7.0"
-    },
-    "peerDependencies": {
-        "@pulumi/pulumi": "latest"
     },
     "pulumi": {
         "resource": true

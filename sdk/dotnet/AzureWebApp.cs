@@ -7,17 +7,11 @@ using System.Collections.Immutable;
 using System.Threading.Tasks;
 using Pulumi.Serialization;
 
-namespace Pulumi.Xyz
+namespace Pulumi.AzureWebapp
 {
-    [XyzResourceType("xyz:index:StaticPage")]
-    public partial class StaticPage : Pulumi.ComponentResource
+    [AzureWebappResourceType("x:index:AzureWebApp")]
+    public partial class AzureWebApp : Pulumi.ComponentResource
     {
-        /// <summary>
-        /// The bucket resource.
-        /// </summary>
-        [Output("bucket")]
-        public Output<Pulumi.Aws.S3.Bucket> Bucket { get; private set; } = null!;
-
         /// <summary>
         /// The website URL.
         /// </summary>
@@ -26,14 +20,14 @@ namespace Pulumi.Xyz
 
 
         /// <summary>
-        /// Create a StaticPage resource with the given unique name, arguments, and options.
+        /// Create a AzureWebApp resource with the given unique name, arguments, and options.
         /// </summary>
         ///
         /// <param name="name">The unique name of the resource</param>
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
-        public StaticPage(string name, StaticPageArgs args, ComponentResourceOptions? options = null)
-            : base("xyz:index:StaticPage", name, args ?? new StaticPageArgs(), MakeResourceOptions(options, ""), remote: true)
+        public AzureWebApp(string name, AzureWebAppArgs args, ComponentResourceOptions? options = null)
+            : base("x:index:AzureWebApp", name, args ?? new AzureWebAppArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 
@@ -50,15 +44,33 @@ namespace Pulumi.Xyz
         }
     }
 
-    public sealed class StaticPageArgs : Pulumi.ResourceArgs
+    public sealed class AzureWebAppArgs : Pulumi.ResourceArgs
     {
         /// <summary>
-        /// The HTML content for index.html.
+        /// Id of app service plan to add web app to
         /// </summary>
-        [Input("indexContent", required: true)]
-        public Input<string> IndexContent { get; set; } = null!;
+        [Input("appServicePlanId")]
+        public Input<string>? AppServicePlanId { get; set; }
 
-        public StaticPageArgs()
+        /// <summary>
+        /// Path to dockerfile for app
+        /// </summary>
+        [Input("pathToDockerfile", required: true)]
+        public Input<string> PathToDockerfile { get; set; } = null!;
+
+        /// <summary>
+        /// Resource group to place resources in
+        /// </summary>
+        [Input("resourceGroupName", required: true)]
+        public Input<string> ResourceGroupName { get; set; } = null!;
+
+        /// <summary>
+        /// Port that container is running on
+        /// </summary>
+        [Input("websitePort", required: true)]
+        public Input<int> WebsitePort { get; set; } = null!;
+
+        public AzureWebAppArgs()
         {
         }
     }
