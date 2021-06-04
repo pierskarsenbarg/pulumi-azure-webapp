@@ -6,7 +6,7 @@ import * as utilities from "./utilities";
 
 export class AzureWebApp extends pulumi.ComponentResource {
     /** @internal */
-    public static readonly __pulumiType = 'x:index:AzureWebApp';
+    public static readonly __pulumiType = 'azurewebapp:index:AzureWebApp';
 
     /**
      * Returns true if the given object is an instance of AzureWebApp.  This is designed to work even

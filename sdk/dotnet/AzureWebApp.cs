@@ -9,7 +9,7 @@ using Pulumi.Serialization;
 
 namespace Pulumi.AzureWebapp
 {
-    [AzureWebappResourceType("x:index:AzureWebApp")]
+    [AzureWebappResourceType("azurewebapp:index:AzureWebApp")]
     public partial class AzureWebApp : Pulumi.ComponentResource
     {
         /// <summary>
@@ -27,7 +27,7 @@ namespace Pulumi.AzureWebapp
         /// <param name="args">The arguments used to populate this resource's properties</param>
         /// <param name="options">A bag of options that control this resource's behavior</param>
         public AzureWebApp(string name, AzureWebAppArgs args, ComponentResourceOptions? options = null)
-            : base("x:index:AzureWebApp", name, args ?? new AzureWebAppArgs(), MakeResourceOptions(options, ""), remote: true)
+            : base("azurewebapp:index:AzureWebApp", name, args ?? new AzureWebAppArgs(), MakeResourceOptions(options, ""), remote: true)
         {
         }
 

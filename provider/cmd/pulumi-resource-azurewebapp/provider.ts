@@ -25,7 +25,7 @@ export class Provider implements provider.Provider {
 
         // TODO: Add support for additional component resources here.
         switch (type) {
-            case "x:index:AzureWebApp":
+            case "azurewebapp:index:AzureWebApp":
                 return await constructWebAppContainer(name, inputs, options);
             default:
                 throw new Error(`unknown resource type ${type}`);
